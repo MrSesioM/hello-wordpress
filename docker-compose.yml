@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      - MARIADB_USER=example-user
+      - MARIADB_PASSWORD=my_cool_secret
+      - MARIADB_ROOT_PASSWORD=my-secret-pw
+      - MARIADB_DATABASE=wordpress
+# Uncomment these lines if you need to access mariadb like host
+#    ports:
+#      - "3306:3306"
+    volumes:
+      - ./mariadb-data:/var/lib/mysql
+
+  apache:
+    image: httpd:latest
+    ports:
+    - "80:80"
+    volumes:
+    - ./httpd-data:/usr/local/apache2/htdocs/
